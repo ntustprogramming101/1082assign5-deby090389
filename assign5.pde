@@ -561,34 +561,10 @@ void drawTimerUI(){
 	text(timeString, 3, height + 3);
 
 	// Actual Time Text
-  if(gameTimer>=7200){
-    color timeTextColor = #00ffff;
-    fill(timeTextColor);
-    text(timeString, 0, height);
-  }
-  if(gameTimer<7200 && gameTimer>=3600){
-    color timeTextColor = #ffffff;
-    fill(timeTextColor);
-    text(timeString, 0, height);
-  }
-  if(gameTimer<3600 && gameTimer>=1800){
-    color timeTextColor = #ffcc00;
-    fill(timeTextColor);
-    text(timeString, 0, height);
-  }
-  if(gameTimer>1800 && gameTimer>600){
-    color timeTextColor = #ff6600;
-    fill(timeTextColor);
-    text(timeString, 0, height);
-  }
-  if(gameTimer<600){
-    color timeTextColor = #ff0000;
-    fill(timeTextColor);
-    text(timeString, 0, height);
-  }
-	/*color timeTextColor = #ffffff; 		// Requirement #5: Get the correct color using color getTimeTextColor(int frames)
+  /**/
+	color timeTextColor = getTimeTextColor(gameTimer); 		// Requirement #5: Get the correct color using color getTimeTextColor(int frames)
 	fill(timeTextColor);
-	text(timeString, 0, height);*/
+	text(timeString, 0, height);
 }
 
 void addTime(float seconds){					// Requirement #2
@@ -607,14 +583,29 @@ String convertFramesToTimeString(int frames){	// Requirement #4
   int min = gameTimer/60/60; 
   int sec = gameTimer/60%60;
   String timeString = nf(min,2)+":"+nf(sec,2);
-  //println(sec);
-  //println(min);
   return nf(min,2)+":"+nf(sec,2);//timeString;
   //return "";
 }
 
 color getTimeTextColor(int frames){				// Requirement #5
-	return #ffffff;
+	int whatColor=0;
+  if(gameTimer>=7200){
+    whatColor = #00ffff;
+  }
+  else if(gameTimer<7200 && gameTimer>=3600){
+    whatColor = #ffffff;
+  }
+  else if(gameTimer<3600 && gameTimer>=1800){
+    whatColor = #ffcc00;
+  }
+  if(gameTimer<1800 && gameTimer>600){
+    whatColor = #ff6600;
+  }
+  if(gameTimer<600){
+    whatColor = #ff0000;
+  }
+  return whatColor;
+  //return #ffffff;
 }
 
 int getEnemyIndexByRow(int row){				// Requirement #6
